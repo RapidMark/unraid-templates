@@ -14,14 +14,21 @@ First run creates the database and admin user from the variables below, so fill 
   <Category>Downloaders: Tools:Utilities</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/templates/nntmux.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/icon.png</Icon>
+  <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/nntmux_icon.png</Icon>
   <ExtraParams>--stop-timeout 120</ExtraParams>
   <ReadMe>https://raw.githubusercontent.com/RapidMark/NNTmux/master/unraid/README.md</ReadMe>
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-09-22</Date>
-  <Changes>Initial release</Changes>
+  <Date>2026-10-02</Date>
+  <Changes>
+### 2026-10-02
+- New: IRC PRE scraper nick, Look inside releases, Use PAR2 names, Fix release names, Pulse monitoring
+- Sharper icon
+
+### 2026-09-22
+- Initial release
+</Changes>
   <Config Name="WebUI" Target="80" Default="8085" Mode="tcp" Description="Web interface port" Type="Port" Display="always" Required="true" Mask="false">8085</Config>
   <Config Name="Config" Target="/config" Default="/mnt/user/appdata/nntmux" Mode="rw" Description="Settings, database, Redis and Manticore data" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/nntmux</Config>
   <Config Name="Data" Target="/data" Default="/mnt/user/appdata/nntmux/data" Mode="rw" Description="NZB files and cover images. Grows large, put it on the array if you like." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/nntmux/data</Config>
@@ -38,6 +45,11 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="Admin Username" Target="ADMIN_USER" Default="admin" Mode="" Description="Created on first run" Type="Variable" Display="always" Required="true" Mask="false">admin</Config>
   <Config Name="Admin Password" Target="ADMIN_PASS" Default="" Mode="" Description="At least 12 characters. Used on first run only." Type="Variable" Display="always" Required="true" Mask="true"></Config>
   <Config Name="Admin Email" Target="ADMIN_EMAIL" Default="" Mode="" Description="Created on first run" Type="Variable" Display="always" Required="true" Mask="false"></Config>
+  <Config Name="IRC PRE scraper nick" Target="SCRAPE_IRC_USERNAME" Default="" Mode="" Description="Nick for the PRE scraper (#PreNNTmux on SynIRC). Must be unique, add a few random characters, e.g. yourname_k7q2x. Setting a nick turns the scraper on." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="Look inside releases" Target="CHECK_PASSWORDED_RARS" Default="true" Mode="" Description="Reads file lists inside releases so hashed names can be renamed" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Use PAR2 names" Target="ADD_PAR2" Default="true" Mode="" Description="Uses PAR2 file names to rename releases" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Fix release names" Target="FIX_NAMES" Default="true" Mode="" Description="Renames releases using NFOs, PAR2 and file names (same as Admin, Tmux, Fix Release Names)" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Pulse monitoring" Target="PULSE_ENABLED" Default="false" Mode="" Description="Laravel Pulse. Grows the database fast, leave off unless you need it" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="Start indexer" Target="START_INDEXER" Default="true" Mode="" Description="Set false to run only the web UI without the tmux indexing engine" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="MariaDB buffer pool" Target="DB_INNODB_BUFFER_POOL_SIZE" Default="1G" Mode="" Description="InnoDB buffer pool size, raise on a box with spare RAM" Type="Variable" Display="advanced" Required="false" Mask="false">1G</Config>
   <Config Name="TMDB API key" Target="TMDB_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
