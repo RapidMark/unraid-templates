@@ -20,12 +20,16 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-02</Date>
+  <Date>2026-10-04</Date>
   <Changes>
+### 2026-10-04
+- Much faster release processing with a full PreDB (added a missing database index)
+
 ### 2026-10-02
-- New: IRC PRE scraper nick, Look inside releases, Use PAR2 names, Fix release names, Pulse monitoring
+- New: IRC PRE scraper nick, Look inside releases, Use PAR2 names, Fix release names, Pulse monitoring, Minimum release size (MB)
+- Latest NNTmux, including security fixes
+- Faster database settings, system security updates
 - Sharper icon
-- New: Minimum release size (MB)
 
 ### 2026-09-22
 - Initial release
