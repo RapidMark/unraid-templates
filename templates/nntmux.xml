@@ -24,6 +24,8 @@ First run creates the database and admin user from the variables below, so fill 
   <Changes>
 ### 2026-10-04
 - Much faster release processing with a full PreDB (added a missing database index)
+- Far fewer database lock errors under heavy load
+- Headers that hit a lock are retried longer and repaired later instead of lost
 
 ### 2026-10-02
 - New: IRC PRE scraper nick, Look inside releases, Use PAR2 names, Fix release names, Pulse monitoring, Minimum release size (MB)
