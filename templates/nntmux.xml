@@ -27,6 +27,7 @@ First run creates the database and admin user from the variables below, so fill 
 - Database updates now run automatically when the container updates
 - tmux 3.7b and a UTF-8 locale (fixes the indexer not starting)
 - Fixed groups getting stuck re-reading years-old posts
+- Fixed password-protected releases being offered to Sonarr/Radarr
 
 ### 2026-10-04
 - Much faster release processing with a full PreDB (added a missing database index)
