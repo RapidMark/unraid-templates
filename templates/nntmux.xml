@@ -20,8 +20,13 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-04</Date>
+  <Date>2026-10-06</Date>
   <Changes>
+### 2026-10-06
+- Latest NNTmux: new settings system, faster PreDB matching
+- Database updates now run automatically when the container updates
+- Fixed the indexer not starting with tmux 3.3
+
 ### 2026-10-04
 - Much faster release processing with a full PreDB (added a missing database index)
 - Far fewer database lock errors under heavy load
