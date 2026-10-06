@@ -25,7 +25,8 @@ First run creates the database and admin user from the variables below, so fill 
 ### 2026-10-06
 - Latest NNTmux: new settings system, faster PreDB matching
 - Database updates now run automatically when the container updates
-- Fixed the indexer not starting with tmux 3.3
+- tmux 3.7b and a UTF-8 locale (fixes the indexer not starting)
+- Fixed groups getting stuck re-reading years-old posts
 
 ### 2026-10-04
 - Much faster release processing with a full PreDB (added a missing database index)
