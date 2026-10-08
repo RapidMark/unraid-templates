@@ -20,8 +20,13 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-06</Date>
+  <Date>2026-10-08</Date>
   <Changes>
+### 2026-10-08
+- PreDB matching works again when releases are created (it failed on every lookup)
+- Faster article decoding (native yEnc decoder)
+- Compressed headers from your Usenet provider, on by default
+
 ### 2026-10-06
 - Latest NNTmux: new settings system, faster PreDB matching
 - Database updates now run automatically when the container updates
@@ -66,6 +71,7 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="Fix release names" Target="FIX_NAMES" Default="true" Mode="" Description="Renames releases using NFOs, PAR2 and file names (same as Admin, Tmux, Fix Release Names)" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="Pulse monitoring" Target="PULSE_ENABLED" Default="false" Mode="" Description="Laravel Pulse. Grows the database fast, leave off unless you need it" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="Minimum release size (MB)" Target="MIN_RELEASE_SIZE_MB" Default="50" Mode="" Description="Skip releases smaller than this. Stops broken one-file fragments of obfuscated posts from cluttering the index." Type="Variable" Display="advanced" Required="false" Mask="false">50</Config>
+  <Config Name="Compressed headers" Target="NNTP_COMPRESSED_HEADERS" Default="true" Mode="" Description="Ask your Usenet provider for compressed headers (much less bandwidth). Set to false if your provider does not support XFEATURE COMPRESS GZIP." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="Start indexer" Target="START_INDEXER" Default="true" Mode="" Description="Set false to run only the web UI without the tmux indexing engine" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="MariaDB buffer pool" Target="DB_INNODB_BUFFER_POOL_SIZE" Default="1G" Mode="" Description="MariaDB memory cache. Set to about half your spare RAM (e.g. 8G, 16G, 32G). Bigger is faster." Type="Variable" Display="advanced" Required="false" Mask="false">1G</Config>
   <Config Name="TMDB API key" Target="TMDB_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
