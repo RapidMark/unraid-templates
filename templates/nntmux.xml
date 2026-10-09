@@ -20,8 +20,11 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-08</Date>
+  <Date>2026-10-09</Date>
   <Changes>
+### 2026-10-09
+- Compressed headers no longer fail to download (they were often cut off), and part repair works again
+
 ### 2026-10-08
 - PreDB matching works again when releases are created (it failed on every lookup)
 - Faster article decoding (native yEnc decoder)
