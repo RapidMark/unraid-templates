@@ -24,6 +24,9 @@ First run creates the database and admin user from the variables below, so fill 
   <Changes>
 ### 2026-10-09
 - Compressed headers no longer fail to download (they were often cut off), and part repair works again
+- Post-processing workers no longer block each other (no more database lock errors)
+- Missing API keys are listed once at startup instead of on every lookup
+- IMDb scraping pauses for an hour when IMDb blocks it, then tries once (new fields: IMDb scraping, IMDb block pause); the dead imdbapi.dev fallback is off
 
 ### 2026-10-08
 - PreDB matching works again when releases are created (it failed on every lookup)
@@ -82,4 +85,7 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="OMDB API key" Target="OMDB_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="Fanart.tv API key" Target="FANARTTV_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="Trakt API key" Target="TRAKTTV_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="IMDb scraping" Target="IMDB_SCRAPER_ENABLED" Default="true" Mode="" Description="Look titles up on imdb.com directly. IMDb often answers scripts with a bot check; NNTmux then pauses and tries one lookup per pause. TMDB and OMDb also provide IMDb ids, ratings and plots." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="IMDb block pause (minutes)" Target="IMDB_SCRAPER_BLOCK_BACKOFF_MINUTES" Default="60" Mode="" Description="After IMDb blocks a lookup, pause IMDb scraping this long, then try once." Type="Variable" Display="advanced" Required="false" Mask="false">60</Config>
+  <Config Name="imdbapi.dev fallback" Target="IMDBAPI_DEV_ENABLED" Default="false" Mode="" Description="Old fallback for IMDb lookups. The site no longer exists; leave off." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
 </Container>
