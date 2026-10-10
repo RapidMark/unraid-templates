@@ -20,8 +20,15 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-09</Date>
+  <Date>2026-10-10</Date>
   <Changes>
+### 2026-10-10
+- Passworded 7z uploads are recognised (they were left as unknown), and 7z file lists are read with 7-Zip
+- Archives behind obfuscated names are found by looking at the first bytes of the files
+- Archives that can't be read get one more try a day later
+- Plain videos (also split .avi.001 style) count as not passworded
+- If the first RAR volume is missing its first piece, a later volume is read instead
+
 ### 2026-10-09
 - Compressed headers no longer fail to download (they were often cut off), and part repair works again
 - Post-processing workers no longer block each other (no more database lock errors)
@@ -88,4 +95,7 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="IMDb scraping" Target="IMDB_SCRAPER_ENABLED" Default="true" Mode="" Description="Look titles up on imdb.com directly. IMDb often answers scripts with a bot check; NNTmux then pauses and tries one lookup per pause. TMDB and OMDb also provide IMDb ids, ratings and plots." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="IMDb block pause (minutes)" Target="IMDB_SCRAPER_BLOCK_BACKOFF_MINUTES" Default="60" Mode="" Description="After IMDb blocks a lookup, pause IMDb scraping this long, then try once." Type="Variable" Display="advanced" Required="false" Mask="false">60</Config>
   <Config Name="imdbapi.dev fallback" Target="IMDBAPI_DEV_ENABLED" Default="false" Mode="" Description="Old fallback for IMDb lookups. The site no longer exists; leave off." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="7-Zip path" Target="SEVENZIP_PATH" Default="/usr/bin/7z" Mode="" Description="7-Zip binary used to read 7z archives whose file list is compressed. Empty turns it off." Type="Variable" Display="advanced" Required="false" Mask="false">/usr/bin/7z</Config>
+  <Config Name="Archive probe files" Target="NN_ARCHIVE_PROBE_FILES" Default="3" Mode="" Description="For posts with obfuscated file names, how many files to sample to find an archive. 0 turns it off." Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
+  <Config Name="Archive retry delay (seconds)" Target="NN_ARCHIVE_RETRY_DELAY" Default="86400" Mode="" Description="An archive that can't be read is tried once more after this long (default 1 day)." Type="Variable" Display="advanced" Required="false" Mask="false">86400</Config>
 </Container>
