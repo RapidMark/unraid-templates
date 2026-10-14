@@ -20,8 +20,14 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-10</Date>
+  <Date>2026-10-14</Date>
   <Changes>
+### 2026-10-14
+- Latest NNTmux, including better sample and preview image downloads and the season pack check
+- Split videos (.mkv.001 style) are always checked for a hidden archive, also with only password checking on
+- A release with a plain video next to an archive that can't be read stays unknown instead of being marked not passworded
+- 7z file lists are read with limits (1000 entries or 4 MB, implausible sizes rejected); a list that hits a limit leaves the release unknown unless a passworded file was already seen
+
 ### 2026-10-10
 - Passworded 7z uploads are recognised (they were left as unknown), and 7z file lists are read with 7-Zip
 - Archives behind obfuscated names are found by looking at the first bytes of the files
