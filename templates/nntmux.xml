@@ -20,8 +20,15 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-14</Date>
+  <Date>2026-10-15</Date>
   <Changes>
+### 2026-10-15
+- 7z file names with accented or Asian characters (e.g. Åland, 久) are kept intact
+- A 7z file list with a damaged or unclear entry leaves the release unknown instead of marking it not passworded
+- The 7z file list limit is applied exactly
+- Same-named RAR, ZIP and 7z files in one post are checked separately
+- All fixes from this template are now part of NNTmux itself
+
 ### 2026-10-14
 - Latest NNTmux, including better sample and preview image downloads and the season pack check
 - Split videos (.mkv.001 style) are always checked for a hidden archive, also with only password checking on
