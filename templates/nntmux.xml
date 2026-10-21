@@ -26,6 +26,7 @@ First run creates the database and admin user from the variables below, so fill 
 - Latest NNTmux
 - The PreDB IRC scraper logs in again after a reconnect when its nickname is still taken, instead of hanging (NNTmux#1900)
 - New advanced setting: Redis read timeout, default 10 seconds. With the old 2 seconds the processing monitor could stop during heavy disk activity and leave everything stopped
+- If the processing monitor stops anyway, the container restarts the processing by itself (NNTmux#1903). Before, everything stayed stopped while the container still showed healthy
 
 ### 2026-10-15
 - 7z file names with accented or Asian characters (e.g. Åland, 久) are kept intact
