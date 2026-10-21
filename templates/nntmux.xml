@@ -20,8 +20,13 @@ First run creates the database and admin user from the variables below, so fill 
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-15</Date>
+  <Date>2026-10-21</Date>
   <Changes>
+### 2026-10-21
+- Latest NNTmux
+- The PreDB IRC scraper logs in again after a reconnect when its nickname is still taken, instead of hanging (NNTmux#1900)
+- New advanced setting: Redis read timeout, default 10 seconds. With the old 2 seconds the processing monitor could stop during heavy disk activity and leave everything stopped
+
 ### 2026-10-15
 - 7z file names with accented or Asian characters (e.g. Åland, 久) are kept intact
 - A 7z file list with a damaged or unclear entry leaves the release unknown instead of marking it not passworded
@@ -107,6 +112,7 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="Trakt API key" Target="TRAKTTV_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="IMDb scraping" Target="IMDB_SCRAPER_ENABLED" Default="true" Mode="" Description="Look titles up on imdb.com directly. IMDb often answers scripts with a bot check; NNTmux then pauses and tries one lookup per pause. TMDB and OMDb also provide IMDb ids, ratings and plots." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="IMDb block pause (minutes)" Target="IMDB_SCRAPER_BLOCK_BACKOFF_MINUTES" Default="60" Mode="" Description="After IMDb blocks a lookup, pause IMDb scraping this long, then try once." Type="Variable" Display="advanced" Required="false" Mask="false">60</Config>
+  <Config Name="Redis read timeout (seconds)" Target="REDIS_READ_TIMEOUT" Default="10" Mode="" Description="How long NNTmux waits for Redis to answer. The default of 2 seconds is too short when the disk is busy: the tmux monitor gets a read error and stops." Type="Variable" Display="advanced" Required="false" Mask="false">10</Config>
   <Config Name="imdbapi.dev fallback" Target="IMDBAPI_DEV_ENABLED" Default="false" Mode="" Description="Old fallback for IMDb lookups. The site no longer exists; leave off." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
   <Config Name="7-Zip path" Target="SEVENZIP_PATH" Default="/usr/bin/7z" Mode="" Description="7-Zip binary used to read 7z archives whose file list is compressed. Empty turns it off." Type="Variable" Display="advanced" Required="false" Mask="false">/usr/bin/7z</Config>
   <Config Name="Archive probe files" Target="NN_ARCHIVE_PROBE_FILES" Default="3" Mode="" Description="For posts with obfuscated file names, how many files to sample to find an archive. 0 turns it off." Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
