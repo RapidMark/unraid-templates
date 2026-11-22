@@ -1,11 +1,7 @@
 <CommunityApplications>
-  <Profile>Unraid templates and plugins by RapidMark.
+  <Profile>Unraid templates for containers built by RapidMark.
 
-NNTmux: a self-contained Usenet indexer. One container with MariaDB, Redis and Manticore bundled, built from the upstream NNTmux source.
-
-Mover Dashboard: a plugin that adds a Mover tab showing what the mover is doing while it runs: the file being moved with its progress, the mover's queue, what is waiting on each cache pool, and per-drive read and write activity with the apps that have files open.
-
-Support for each goes to the GitHub issues linked from its template.</Profile>
+NNTmux: a self-contained Usenet indexer. One container with MariaDB, Redis and Manticore bundled, built from the upstream NNTmux source. Support for the container goes to the GitHub issues linked from the template.</Profile>
   <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/icon.png</Icon>
   <WebPage>https://github.com/RapidMark/unraid-templates</WebPage>
 </CommunityApplications>
