@@ -15,7 +15,7 @@
     The plugin only reads system state. It does not start, stop or change the mover. Turn on Settings, Mover Settings, Mover progress for exact totals and ETA.
   </Overview>
   <Category>Tools:System Tools:Utilities</Category>
-  <Icon>https://raw.githubusercontent.com/RapidMark/unraid-mover-dashboard/main/ca/mover-dashboard.png</Icon>
+  <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/mover_dashboard_icon.png</Icon>
   <License>MIT</License>
   <MinVer>7.0.0</MinVer>
 </Plugin>
