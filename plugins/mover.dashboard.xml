@@ -18,4 +18,9 @@
   <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/mover_dashboard_icon.png</Icon>
   <License>MIT</License>
   <MinVer>7.0.0</MinVer>
+  <ExtraSearchTerms>mover cache array progress queue disk activity dashboard</ExtraSearchTerms>
+  <Changes>
+    ###2026.11.21
+    - First release: a Mover tab with the file being moved and its progress, the mover's queue, what is waiting on each cache pool, read and write per drive with the apps using them, and array write speed over 15 minutes.
+  </Changes>
 </Plugin>
