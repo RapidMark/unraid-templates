@@ -15,13 +15,26 @@ First run creates the database and admin user from the variables below, so fill 
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/templates/nntmux.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/nntmux_icon.png</Icon>
-  <ExtraParams>--stop-timeout 120</ExtraParams>
+  <ExtraParams/>
   <ReadMe>https://raw.githubusercontent.com/RapidMark/NNTmux/master/unraid/README.md</ReadMe>
   <ExtraSearchTerms>usenet indexer newznab nzb nntmux</ExtraSearchTerms>
   <Requires>Usenet provider account (NNTP). First run needs ADMIN_USER, ADMIN_EMAIL, ADMIN_PASS (12+ chars) and the NNTP settings.</Requires>
   <License>GPL-3.0</License>
-  <Date>2026-10-21</Date>
+  <Date>2026-11-23</Date>
   <Changes>
+### 2026-11-23
+- Latest NNTmux
+- New advanced setting: NZB build queue (off by default). Queue workers build the NZBs, so release runs only form releases and no longer time out on big NZB batches. A group pauses while 2000 of its releases wait for an NZB
+- New advanced setting: MariaDB redo log (default 4G). A bigger log rides out write bursts
+- New advanced setting: Merge late collections (off by default). Late headers of a released post are added to its NZB instead of forming a second release
+- New advanced setting: Defer header aggregates (off by default). Header workers queue part counts and one aggregator recounts them, which avoids deadlocks on busy groups
+- After a restart, processing starts at once. Incomplete posts are held for one collection delay instead of every waiting collection being rewritten, which took hours on a large database
+- The container no longer stops itself when MariaDB needs more than 2 minutes to recover. MariaDB now stops in seconds and replays its log on the next start
+- On a btrfs pool, a new install turns copy-on-write off for the database when /config is mapped to the pool itself (e.g. /mnt/cache/appdata/nntmux). The README explains how to convert an existing database
+- One release worker timing out no longer skips the remaining groups
+- The processing monitor no longer stalls counting very large tables
+- MariaDB disk I/O tuned for NVMe
+
 ### 2026-10-21
 - Latest NNTmux
 - The PreDB IRC scraper logs in again after a reconnect when its nickname is still taken, instead of hanging (NNTmux#1900)
@@ -106,6 +119,7 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="Compressed headers" Target="NNTP_COMPRESSED_HEADERS" Default="true" Mode="" Description="Ask your Usenet provider for compressed headers (much less bandwidth). Set to false if your provider does not support XFEATURE COMPRESS GZIP." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="Start indexer" Target="START_INDEXER" Default="true" Mode="" Description="Set false to run only the web UI without the tmux indexing engine" Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
   <Config Name="MariaDB buffer pool" Target="DB_INNODB_BUFFER_POOL_SIZE" Default="1G" Mode="" Description="MariaDB memory cache. Set to about half your spare RAM (e.g. 8G, 16G, 32G). Bigger is faster." Type="Variable" Display="advanced" Required="false" Mask="false">1G</Config>
+  <Config Name="MariaDB redo log" Target="DB_INNODB_LOG_FILE_SIZE" Default="4G" Mode="" Description="MariaDB redo log size. A bigger log lets writes run longer before they wait on page flushing (e.g. 4G, 8G, 16G)." Type="Variable" Display="advanced" Required="false" Mask="false">4G</Config>
   <Config Name="TMDB API key" Target="TMDB_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="TVDB API key" Target="TVDB_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
   <Config Name="OMDB API key" Target="OMDB_APIKEY" Default="" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
@@ -118,4 +132,7 @@ First run creates the database and admin user from the variables below, so fill 
   <Config Name="7-Zip path" Target="SEVENZIP_PATH" Default="/usr/bin/7z" Mode="" Description="7-Zip binary used to read 7z archives whose file list is compressed. Empty turns it off." Type="Variable" Display="advanced" Required="false" Mask="false">/usr/bin/7z</Config>
   <Config Name="Archive probe files" Target="NN_ARCHIVE_PROBE_FILES" Default="3" Mode="" Description="For posts with obfuscated file names, how many files to sample to find an archive. 0 turns it off." Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
   <Config Name="Archive retry delay (seconds)" Target="NN_ARCHIVE_RETRY_DELAY" Default="86400" Mode="" Description="An archive that can't be read is tried once more after this long (default 1 day)." Type="Variable" Display="advanced" Required="false" Mask="false">86400</Config>
+  <Config Name="Defer header aggregates" Target="NN_DEFER_HEADER_AGGREGATES" Default="false" Mode="" Description="Header workers queue part counts in Redis; one aggregator recounts them (avoids deadlocks on busy groups)" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Merge late collections" Target="NN_MERGE_LATE_COLLECTIONS" Default="false" Mode="" Description="Late headers of a released post are added to its NZB instead of forming a second release" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="NZB build queue" Target="NN_NZB_QUEUE" Default="false" Mode="" Description="Queue workers build the NZBs; release runs only form releases and pause a group while its NZB backlog is full" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
 </Container>
