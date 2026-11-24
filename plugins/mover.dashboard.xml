@@ -21,6 +21,11 @@
   <MinVer>7.0.0</MinVer>
   <ExtraSearchTerms>mover cache array progress queue disk activity dashboard</ExtraSearchTerms>
   <Changes>
+    ###2026.11.24
+    - Keeps its state in /var/run instead of /tmp (suggested by the Community Applications review).
+    - The package is also checked by SHA256.
+    - No fonts are loaded from Google; the page uses local fonts.
+
     ###2026.11.23
     - The Plugins page shows the name Mover Dashboard instead of mover.dashboard.
 
