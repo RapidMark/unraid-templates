@@ -17,7 +17,7 @@
   <Category>Tools:System Tools:Utilities</Category>
   <Icon>https://raw.githubusercontent.com/RapidMark/unraid-templates/main/mover_dashboard_icon.png</Icon>
   <License>MIT</License>
-  <Screenshot>https://raw.githubusercontent.com/RapidMark/unraid-mover-dashboard/main/screenshot.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/RapidMark/unraid-mover-dashboard/main/screenshot-demo.png</Screenshot>
   <MinVer>7.0.0</MinVer>
   <ExtraSearchTerms>mover cache array progress queue disk activity dashboard</ExtraSearchTerms>
   <Changes>
