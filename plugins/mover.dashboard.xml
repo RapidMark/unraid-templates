@@ -21,6 +21,9 @@
   <MinVer>7.0.0</MinVer>
   <ExtraSearchTerms>mover cache array progress queue disk activity dashboard</ExtraSearchTerms>
   <Changes>
+    ###2026.11.26a
+    - A small sidecar file that goes with the file being moved is listed by its own name, not under the moving file's title.
+
     ###2026.11.26
     - A very long file name no longer pushes the percentage and target drive out of the Moving now panel; the name is shortened with an ellipsis.
 
